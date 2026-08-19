@@ -1,4 +1,4 @@
-// declaring the different roles that the users can have
+// declaring the different roles that the users can have.
 export const roles = [
   "anon", // anonymous
   "student",
