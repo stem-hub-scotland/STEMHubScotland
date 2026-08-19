@@ -32,7 +32,7 @@ export async function get_role(): Promise<Role> {
     .overrideTypes<User>();
 
   if (select_error || !data) {
-    assert(!select_error, "somehow there's a users without a table WTF");
+    assert(select_error, "somehow there's a users without a table WTF");
     console.log(select_error);
     return "anon" as Role;
   }
