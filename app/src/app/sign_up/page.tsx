@@ -1,4 +1,4 @@
-import { requireRole } from "@c/GetAuth";
+import { requireRole } from "@/lib/supabase/GetAuth";
 import SignUpForm from "./SignUpForm";
 
 // wants to have a separate place that is server side not client for efficiency
