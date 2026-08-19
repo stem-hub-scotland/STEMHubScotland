@@ -28,6 +28,8 @@ export default async function GetEvents(): Promise<Event[] | null | undefined> {
 
   if (select_error) {
     assert(!select_error, "somehow there was a select_error");
+    console.log(JSON.stringify(select_error, null, 2));
+    return;
   }
 
   if (!data) {
