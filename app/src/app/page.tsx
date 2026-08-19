@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { requireRole } from "@/lib/supabase/GetAuth";
-import "./global.css";
+
+import LinkButton from "@/Components/ui/LinkButton";
 
 export default async function Home() {
   await requireRole();
@@ -19,17 +20,13 @@ export default async function Home() {
             event organisers to discover opportunities, get critical information
             and meet others.
           </p>
-          <div className="flex flex-row">
-            <div className="flex justify-center items-center w-1/2 rounded-md bg-blue-700 hover:bg-blue-800 m-2 min-h-10">
-              <Link href="/event_calendar" className="text-white">
-                Browse Events
-              </Link>
-            </div>
-            <div className="flex justify-center items-center w-1/2 rounded-md bg-blue-700 hover:bg-blue-800 m-2 min-h-10">
-              <Link href="/explore_programs" className="text-white">
-                Explore Programs
-              </Link>
-            </div>
+          <div className="flex flex-row gap-4">
+            <LinkButton className="flex-1" href="/event_calendar">
+              Browse Events
+            </LinkButton>
+            <LinkButton className="flex-1" href="/explore_programs">
+              Explore Programs
+            </LinkButton>
           </div>
         </div>
       </div>
