@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { type Role } from "@t/roles";
 import { get_role } from "./GetAuth";
-import { get } from "http";
 
 async function NavBar() {
   const value: {

@@ -1,7 +1,7 @@
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@l/supabase/server";
 import { assert } from "console";
 import { redirect } from "next/navigation";
-import { type Role, roles } from "@/types/roles";
+import { type Role, roles } from "@t/roles";
 
 // function that returns the current Role of the logged in users. If there isn't a user logged in returns anon (anonymous)
 export async function get_role(): Promise<Role> {
