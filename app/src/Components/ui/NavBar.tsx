@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { type Role } from "@t/roles";
-import { get_role } from "@/lib/supabase/GetAuth";
+import { get_role } from "@l/supabase/GetAuth";
 import { get } from "http";
 
 async function NavBar() {

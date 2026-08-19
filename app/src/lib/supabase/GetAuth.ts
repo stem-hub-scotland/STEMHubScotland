@@ -1,7 +1,8 @@
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@l/supabase/server";
 import { assert } from "console";
 import { redirect } from "next/navigation";
-import { type Role, roles } from "@/types/roles";
+import { type Role, roles } from "@t/roles";
+import { User } from "@t/Users";
 
 // function that returns the current Role of the logged in users. If there isn't a user logged in returns anon (anonymous)
 export async function get_role(): Promise<Role> {
@@ -27,15 +28,22 @@ export async function get_role(): Promise<Role> {
     .from("Users")
     .select()
     .eq("id", user.id)
-    .single();
+    .single()
+    .overrideTypes<User>();
 
   if (select_error || !data) {
     assert(!select_error, "somehow there's a users without a table WTF");
     console.log(select_error);
     return "anon" as Role;
   }
-  const result = data.role as Role;
-  return result;
+  if ("Error" in data) {
+    console.log(
+      "there was a coder error the database type needs to be updated with ```npx supabase gen types typescript --project-id THE_PROJECT_ID > src/types/database.ts ``` replace THE_PROJECT_ID with the project id from the .env",
+    );
+    return "anon";
+  }
+  const role = data.role as Role;
+  return role;
 }
 
 // checks if the current role is in a list of roles if not then it redirects to home page. you can leave empty to not have any requirements. Is to be used at the start of pages to check if they have the required role
