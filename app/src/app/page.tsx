@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { requireRole } from "@/Components/GetAuth";
+import { requireRole } from "@/lib/supabase/GetAuth";
 import "./global.css";
 
 export default async function Home() {

@@ -1,4 +1,4 @@
-import { requireRole } from "@/Components/GetAuth";
+import { requireRole } from "@/lib/supabase/GetAuth";
 
 async function event_organising() {
   await requireRole();

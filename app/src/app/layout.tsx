@@ -1,4 +1,4 @@
-import NavBar from "@/Components/NavBar";
+import NavBar from "@/Components/ui/NavBar";
 import "@/app/global.css";
 
 export const metadata = {
