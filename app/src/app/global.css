@@ -3,7 +3,7 @@
 
 :root {
 
-    --background: #0a0a0a;
+    --background: #ffffff;
     --foreground: #ededed;
 
     --color-primary: #1447e6;
@@ -12,8 +12,8 @@
 
     --color-surface: #ffffff;
 
-    --color-text-primary: #f8fafc;
-    --color-text-secondary: #C4D8E3;
+    --color-text-primary: #545454;
+    --color-text-secondary: #030303;
 
     --color-border: #334155;
 
@@ -56,27 +56,6 @@
     --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 
-@keyframes section-highlight {
-    0% {
-        border-color: transparent;
-    }
-
-    50% {
-        border-color: var(--color-primary);
-    }
-
-    100% {
-        border-color: transparent;
-    }
-}
-
-.section-highlight {
-    border-width: 1px;
-    border-style: solid;
-    animation: section-highlight 500ms ease-in-out;
-}
-
-
 
 body {
     background: var(--background);
@@ -88,10 +67,3 @@ h1 {
   font-family: Helvetica, Arial, sans-serif;
 }
 
-@utility scrollbar-hidden {
-    scrollbar-width: none;
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
-}

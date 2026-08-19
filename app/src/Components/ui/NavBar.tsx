@@ -23,8 +23,8 @@ async function NavBar() {
       role: await get_role(),
     },
     {
-      display: "Event Calendar",
-      link: "/event_calendar",
+      display: "Events",
+      link: "/events",
       roles_needed: [],
       role: await get_role(),
     },

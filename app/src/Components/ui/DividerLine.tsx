@@ -12,10 +12,10 @@ export default function DividerLine({
     return (
         <div
             className={twMerge(
-                "border-white/10 shrink-0 self-stretch",
+                "border-black/10 shrink-0 self-stretch",
                 orientation === "horizontal" 
-                    ? "w-full border-t my-4" 
-                    : "h-full border-l mx-4",
+                    ? "w-full border-t my-6" 
+                    : "h-full border-l mx-6",
                 className
             )}
         />
