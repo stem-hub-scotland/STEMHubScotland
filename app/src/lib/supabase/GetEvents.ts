@@ -4,22 +4,6 @@ import { type Event } from "@t/Events";
 
 export default async function GetEvents(): Promise<Event[] | null | undefined> {
   const supabase = await createClient();
-  const {
-    data: { user: user },
-    error: user_error,
-  } = await supabase.auth.getUser();
-
-  if (user_error) {
-    if (user_error.name !== "AuthSessionMissingError") {
-      console.log("mistake were made:", user_error);
-    }
-    return;
-  }
-
-  // impossible to reach code ignore
-  if (!user) {
-    return;
-  }
 
   const { data, error: select_error } = await supabase
     .from("Events")
@@ -39,5 +23,6 @@ export default async function GetEvents(): Promise<Event[] | null | undefined> {
     );
     return;
   }
+
   return data;
 }
