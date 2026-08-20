@@ -2,26 +2,21 @@ import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 
 type LinkCardProps = {
-    href: string;
-    children: React.ReactNode;
-    className?: string;
+  href: string;
+  children: React.ReactNode;
+  className?: string;
 };
 
-export default function LinkCard({
-    href,
-    children,
-    className,
-}: LinkCardProps) {
-
-    return (
-        <Link
-            href={href}
-            className={twMerge(`
+export default function LinkCard({ href, children, className }: LinkCardProps) {
+  return (
+    <Link
+      href={href}
+      className={twMerge(`
                 block
 
                 rounded-card
 
-                bg-panel/50
+                bg-panel
                 backdrop-blur-xl
 
                 border
@@ -32,13 +27,12 @@ export default function LinkCard({
                 transition-all
                 duration-200
 
-                hover:scale-[1.02]
-                hover:border-primary
+                hover:scale-[1.01]
 
                 ${className ?? ""}
             `)}
-        >
-            {children}
-        </Link>
-    );
+    >
+      {children}
+    </Link>
+  );
 }
