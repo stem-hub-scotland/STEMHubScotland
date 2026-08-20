@@ -35,8 +35,10 @@ async function Events() {
 
   if (!events) {
     return (
-      <main className="flex flex-col p-10">
-        <p>Unable to load events.</p>
+      <main className="flex flex-col p-10 h-full w-full">
+        <p className="text-text-primary h-full w-full flex items-center justify-center text-5xl font-bold">
+          Unable To Load Events!
+        </p>
       </main>
     );
   }
