@@ -87,11 +87,11 @@ export default function LoginForm() {
           </Link>
         </div>
 
-        <div className="flex justify-center border rounded-xl bg-blue-300 hover:bg-blue-500">
-          <button type="submit" className="text-2xl font-bold bg-center ">
-            Submit
-          </button>
-        </div>
+        <button
+          type="submit"
+          className="flex justify-center border rounded-xl bg-blue-300 hover:bg-blue-500">
+          <div className="text-2xl font-bold bg-center ">Submit</div>
+        </button>
       </form>
     </main>
   );
