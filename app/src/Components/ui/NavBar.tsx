@@ -1,92 +1,78 @@
 import Link from "next/link";
 import { type Role } from "@t/roles";
 import { get_role } from "@l/supabase/GetAuth";
-import { get } from "http";
+
+import HomeButton from "./HomeButton";
 
 async function NavBar() {
+  const role = await get_role();
+
   const value: {
     display: string;
     link: string;
-    roles_needed: Role[];
-    role: Role;
+    roles_needed?: Role[];
   }[] = [
     {
       display: "About",
       link: "/about",
-      roles_needed: [],
-      role: await get_role(),
-    },
-    {
-      display: "Dashboard",
-      link: "dashboard",
-      roles_needed: [],
-      role: await get_role(),
-    },
-    {
-      display: "Events",
-      link: "/events",
-      roles_needed: [],
-      role: await get_role(),
-    },
-    {
-      display: "Explore Programs",
-      link: "/explore_programs",
-      roles_needed: [],
-      role: await get_role(),
-    },
-    {
-      display: "Student Forums",
-      link: "/student_forums",
-      roles_needed: ["student"],
-      role: await get_role(),
     },
     {
       display: "Volunteering",
       link: "/volunteering",
-      roles_needed: ["volunteer"],
-      role: await get_role(),
+    },
+    {
+      display: "Events",
+      link: "/events",
+    },
+    {
+      display: "Explore Programs",
+      link: "/programs",
+    },
+    {
+      display: "Student Forums",
+      link: "/student_forums",
     },
   ];
+
   return (
-    <div className="flex items-center justify-between bg-white border-b-2 border-gray-300 mx-5 p-1 px-20 h-20">
-      <Link href={"/"} className="hover:bg-blue-50 rounded-sm">
-        <div className="flex-col text-xl">
-          <div className="flex gap-1">
-            <h1 className="text-black font-semibold">STEM</h1>
-            <h1 className="text-blue-800 font-semibold">Scotland</h1>
-          </div>
-          <h1 className="text-gray-400 text-lg font-semibold">HUB</h1>
-        </div>
-      </Link>
+    <div className="flex items-center justify-between border-b-2 border-gray-300 bg-white mx-5 h-20 p-1 px-20">
+      <HomeButton />
 
       <div className="flex gap-2">
-        {value.map(({ display, link, roles_needed, role }, index) => {
+        {value.map(({ display, link, roles_needed }) => {
+          const canAccess = !roles_needed || roles_needed.includes(role);
+
           return (
-            (roles_needed.length === 0 || roles_needed.includes(role)) && (
+            canAccess && (
               <Link
                 href={link}
-                key={index}
-                className="flex justify-center w-40 border-2 border-gray-300 p-1 rounded-lg hover:bg-blue-50">
-                <div className="text-black font-semibold">{display}</div>
+                key={link}
+                className="flex w-40 justify-center rounded-lg border-2 border-gray-300 p-1 hover:bg-blue-50"
+              >
+                <div className="font-semibold text-black">{display}</div>
               </Link>
             )
           );
         })}
-        {(await get_role()) !== "anon" ? (
+
+        {role !== "anon" ? (
           <Link
-            href="\profile"
-            className="flex justify-center text-white w-40 p-1 ml-12 rounded-lg bg-blue-700 hover:bg-blue-800">
+            href="/profile"
+            className="ml-12 flex w-40 justify-center rounded-lg bg-blue-700 p-1 text-white hover:bg-blue-800"
+          >
             Profile
           </Link>
         ) : (
           <Link
-            href="\login"
-            className="flex justify-center text-white w-40 p-1 ml-12 rounded-lg bg-blue-700 hover:bg-blue-800">
-            Login/ Signup
+            href="/login"
+            className="ml-12 flex w-40 justify-center rounded-lg bg-blue-700 p-1 text-white hover:bg-blue-800"
+          >
+            Login / Signup
           </Link>
         )}
       </div>
     </div>
   );
 }
+
 export default NavBar;
