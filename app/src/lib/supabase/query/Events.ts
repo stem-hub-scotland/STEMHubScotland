@@ -3,7 +3,7 @@ import { assert } from "console";
 import { type Event } from "@t/Events";
 import { type Uuid } from "@t/Uuid";
 
-export async function GetEvents(): Promise<Event[] | null | undefined> {
+export async function getEvents(): Promise<Event[] | null | undefined> {
   const supabase = await createClient();
 
   const { data, error: select_error } = await supabase
@@ -28,7 +28,7 @@ export async function GetEvents(): Promise<Event[] | null | undefined> {
   return data;
 }
 
-export async function GetEvent(uuid: Uuid): Promise<Event | null | undefined> {
+export async function getEvent(uuid: Uuid): Promise<Event | null | undefined> {
   const supabase = await createClient();
 
   const { data, error: select_error } = await supabase
@@ -62,7 +62,7 @@ export async function GetEvent(uuid: Uuid): Promise<Event | null | undefined> {
   return data;
 }
 
-export async function GetFormattedEvents(): Promise<
+export async function getFormattedEvents(): Promise<
   Event[] | null | undefined
 > {
   const supabase = await createClient();

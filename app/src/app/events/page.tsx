@@ -1,5 +1,5 @@
 import { requireRole } from "@/lib/supabase/GetAuth";
-import { GetEvents } from "@l/supabase/query/Events";
+import { getEvents, getFormattedEvents } from "@l/supabase/query/Events";
 
 import DividerLine from "@c/ui/DividerLine";
 import ListEventCard from "./ListEventCard";
@@ -24,14 +24,13 @@ const months = [
 type Month = (typeof months)[number];
 
 type DisplayMonth = {
-  month: Month;
-  events: Event[];
+  [M in Month]: Event[];
 };
 
 async function Events() {
   //await requireRole();
 
-  const events = await GetEvents();
+  const events = await getEvents();
 
   if (!events) {
     return (
@@ -43,50 +42,60 @@ async function Events() {
     );
   }
 
-  // Create an entry for every month.
+  // creates a list of the months starting with the current month
+  let thisMonthIndex = new Date().getMonth();
+  let monthsInOrder = months
+    .slice(thisMonthIndex)
+    .concat(months.slice(0, thisMonthIndex));
+
+  // Create an entry for every month in order.
   // This means months with no events can still be displayed.
-  const displayMonths: DisplayMonth[] = months.map((month) => ({
-    month,
-    events: [],
-  }));
+  const displayMonths: DisplayMonth = {} as DisplayMonth;
+  monthsInOrder.forEach((month) => (displayMonths[month] = []));
 
   // Put each event into the correct month.
   events.forEach((event) => {
     const date = new Date(event.date);
     const monthIndex = date.getMonth();
 
-    displayMonths[monthIndex].events.push(event);
+    displayMonths[months[monthIndex]].push(event);
   });
+
+  console.log("filled displayMonths:", displayMonths);
 
   return (
     <main className="flex flex-col p-10">
-      {displayMonths.map((month) => (
-        <section key={month.month} className="mb-10">
-          {/* Month heading */}
-          <h2 className="mb-2 text-3xl font-bold text-text-primary">
-            {month.month}
-          </h2>
+      {monthsInOrder.map((month) => {
+        let current_event = displayMonths[month];
 
-          <DividerLine orientation="horizontal" />
+        return (
+          <section key={month} className="mb-10">
+            {/* Month heading */}
+            <h2 className="mb-2 text-3xl font-bold text-text-primary">
+              {month}
+            </h2>
 
-          {/* Events for this month */}
-          {month.events.length > 0 ? (
-            <div className="mt-4 flex flex-col gap-4">
-              {month.events.map((event) => (
-                <ListEventCard
-                  key={event.id}
-                  title={event.title}
-                  description={event.description}
-                  link=""
-                  date={event.date}
-                />
-              ))}
-            </div>
-          ) : (
-            <p className="mt-4 text-text-primary">No events this month.</p>
-          )}
-        </section>
-      ))}
+            <DividerLine orientation="horizontal" />
+
+            {/* Events for this month */}
+            {current_event.length > 0 ? (
+              <div className="mt-4 flex flex-col gap-4">
+                {current_event.map((event) => (
+                  <ListEventCard
+                    key={event.id}
+                    title={event.title}
+                    description={event.description}
+                    link=""
+                    date={event.date}
+                  />
+                ))}
+              </div>
+            ) : (
+              <p className="mt-4 text-text-primary">No events this month.</p>
+            )}
+          </section>
+        );
+      })}
     </main>
   );
 }
