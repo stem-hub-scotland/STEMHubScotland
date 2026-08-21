@@ -1,6 +1,5 @@
 import { createClient } from "../server";
-import { assert } from "console";
-import { type Event } from "@t/Events";
+import { FormattedEvent, type Event } from "@t/Events";
 import { type Uuid } from "@t/Uuid";
 
 export async function getEvents(): Promise<Event[] | null | undefined> {
@@ -12,7 +11,6 @@ export async function getEvents(): Promise<Event[] | null | undefined> {
     .overrideTypes<Event[]>();
 
   if (select_error) {
-    assert(!select_error, "somehow there was a select_error");
     console.log(JSON.stringify(select_error, null, 2));
     return;
   }
@@ -37,9 +35,13 @@ export async function getEvent(uuid: Uuid): Promise<Event | null | undefined> {
     .eq("id", uuid)
     .single()
     .overrideTypes<Event>();
-
+  // console.log(
+  //   "when getting a event the values returned are:\ndata:",
+  //   data,
+  //   "\nerror:",
+  //   select_error,
+  // );
   if (select_error) {
-    assert(!select_error, "somehow there was a select_error");
     console.log(JSON.stringify(select_error, null, 2));
     return;
   }
@@ -63,17 +65,16 @@ export async function getEvent(uuid: Uuid): Promise<Event | null | undefined> {
 }
 
 export async function getFormattedEvents(): Promise<
-  Event[] | null | undefined
+  FormattedEvent[] | null | undefined
 > {
   const supabase = await createClient();
 
   const { data, error: select_error } = await supabase
     .from("Events")
     .select("id, title, date")
-    .overrideTypes<Event[]>();
+    .overrideTypes<FormattedEvent[]>();
 
   if (select_error) {
-    assert(!select_error, "somehow there was a select_error");
     console.log(JSON.stringify(select_error, null, 2));
     return;
   }

@@ -1,10 +1,14 @@
 import { requireRole } from "@/lib/supabase/GetAuth";
-import { getEvents, getFormattedEvents } from "@l/supabase/query/Events";
+import {
+  getEvent,
+  getEvents,
+  getFormattedEvents,
+} from "@l/supabase/query/Events";
 
 import DividerLine from "@c/ui/DividerLine";
 import ListEventCard from "./ListEventCard";
 
-import { type Event } from "@t/Events";
+import { FormattedEvent, type Event } from "@t/Events";
 
 const months = [
   "January",
@@ -24,13 +28,13 @@ const months = [
 type Month = (typeof months)[number];
 
 type DisplayMonth = {
-  [M in Month]: Event[];
+  [M in Month]: FormattedEvent[];
 };
 
 async function Events() {
   //await requireRole();
 
-  const events = await getEvents();
+  const events = await getFormattedEvents();
 
   if (!events) {
     return (
@@ -84,7 +88,7 @@ async function Events() {
                   <ListEventCard
                     key={event.id}
                     title={event.title}
-                    description={event.description}
+                    description=""
                     link=""
                     date={event.date}
                   />
