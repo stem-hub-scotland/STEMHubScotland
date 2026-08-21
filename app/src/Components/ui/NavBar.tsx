@@ -31,7 +31,7 @@ async function NavBar() {
     },
     {
       display: "Forums",
-      link: "/student_forums",
+      link: "/forums",
     },
   ];
 
