@@ -2,7 +2,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #ededed;
+  --foreground: #595555;
 
   --color-primary: #1447e6;
   --color-primary-hover: #193cb8;
@@ -11,12 +11,12 @@
   --color-surface: #ffffff;
 
   --color-text-primary: #545454;
-  --color-text-secondary: #030303;
+  --color-text-secondary: #eef0ff;
 
   --color-border: #334155;
 
-  --radius-card: 24px;
-  --radius-card_inner: 16px;
+  --radius-card: 12px;
+  --radius-card_inner: 8px;
   --radius-button: 10px;
 
   --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -49,7 +49,7 @@
 
 body {
   background: var(--background);
-  color: var(--foreground);
+  color: var(--color-text-primary);
   font-family: Arial, Helvetica, sans-serif;
 }
 

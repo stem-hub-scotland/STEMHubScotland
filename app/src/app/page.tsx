@@ -22,10 +22,10 @@ export default async function Home() {
             and meet others.
           </p>
           <div className="flex flex-row gap-4">
-            <LinkButton className="flex-1" href="/event_calendar">
+            <LinkButton className="flex-1" href="/events">
               Browse Events
             </LinkButton>
-            <LinkButton className="flex-1" href="/explore_programs">
+            <LinkButton className="flex-1" href="/programs">
               Explore Programs
             </LinkButton>
           </div>
