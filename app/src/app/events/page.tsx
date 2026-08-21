@@ -1,5 +1,5 @@
 import { requireRole } from "@/lib/supabase/GetAuth";
-import GetEvents from "@/lib/supabase/GetEvents";
+import { GetEvents } from "@l/supabase/query/Events";
 
 import DividerLine from "@c/ui/DividerLine";
 import ListEventCard from "./ListEventCard";
