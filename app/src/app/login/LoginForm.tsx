@@ -1,11 +1,13 @@
 "use client";
 import { createClient } from "@/lib/supabase/client";
 import { redirect } from "next/navigation";
-import { type SubmitEvent } from "react";
+import { Activity, useState, type SubmitEvent } from "react";
 import Link from "next/link";
 
 export default function LoginForm() {
   const supabase = createClient();
+
+  const [wrongCredentials, setWrongCredentials] = useState(false);
 
   async function clicked(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -24,10 +26,19 @@ export default function LoginForm() {
       password,
     });
 
-    if (error || !data) {
+    if (error) {
+      if (error.name == "AuthApiError") {
+        setWrongCredentials(true);
+      }
       console.log("sign in error:", error);
       return;
     }
+
+    // impossible to reach code
+    if (!data) {
+      return;
+    }
+
     redirect("/");
   }
 
@@ -40,6 +51,11 @@ export default function LoginForm() {
         <div className="flex justify-center">
           <h1 className="font-bold text-2xl">Login</h1>
         </div>
+        <Activity mode={wrongCredentials ? "visible" : "hidden"}>
+          <div className="flex justify-center">
+            <h1 className="text-red-500"> those credentials are wrong</h1>
+          </div>
+        </Activity>
         <div className="mb-4">
           <label htmlFor="email" className="block mb-1">
             Email
