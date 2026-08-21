@@ -140,8 +140,8 @@ export default function SignUpForm() {
         </div>
         <button
           type="submit"
-          className="flex justify-center border rounded-xl bg-blue-300 hover:bg-blue-500">
-          <div className="text-2xl font-bold bg-center ">Submit</div>
+          className="flex justify-center w-full border rounded-xl bg-blue-300 hover:bg-blue-500">
+          <div className="text-2xl font-bold bg-center">Submit</div>
         </button>
       </form>
     </main>
