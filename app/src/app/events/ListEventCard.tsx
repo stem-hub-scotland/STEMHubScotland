@@ -27,7 +27,7 @@ export default function ListEventCard({
         </p>
       </div>
       <DividerLine orientation="horizontal" />
-      <div className="bg-red-100 w-full h-30 rounded-card_inner mt-3 text-gray-400 items-center flex justify-center">
+      <div className="bg-white w-full h-30 rounded-card_inner mt-3 text-gray-400 items-center flex justify-center">
         Picture goes here
       </div>
     </LinkCard>
